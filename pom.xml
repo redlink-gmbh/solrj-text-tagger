@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2016 Redlink GmbH
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.redlink.solr</groupId>
+    <artifactId>solrj-text-tagger</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>Solr Solrj Tag</name>
+    <description>
+        Extensions to solr client library for the OpenSextant SolrTextTagger TaggerRequestHandler
+    </description>
+    <scm>
+      <connection>scm:git:https://github.com/redlink-gmbh/solrj-text-tagger.git</connection>
+      <developerConnection>scm:git:https://github.com/redlink-gmbh/solrj-text-tagger.git</developerConnection>
+      <url>https://github.com/redlink-gmbh/solrj-text-tagger</url>
+      <tag>HEAD</tag>
+    </scm>
+    <issueManagement>
+      <system>GitHub</system>
+      <url>https://github.com/redlink-gmbh/solrj-text-tagger/issues</url>
+    </issueManagement>
+    <licenses>
+      <license>
+        <name>The Apache Software License, Version 2.0</name>
+        <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        <distribution>repo</distribution>
+      </license>
+    </licenses>
+    
+    <distributionManagement>
+      <snapshotRepository>
+        <id>ossrh</id>
+        <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      </snapshotRepository>
+      <repository>
+        <id>ossrh</id>
+        <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+      </repository>
+    </distributionManagement>
+    
+    <developers>
+      <developer>
+        <name>Rupert Westenthaler</name>
+        <email>rupert.westenthaler@redlink.co</email>
+        <organization>Redlink</organization>
+      </developer>
+    </developers>
+
+    <properties>
+      <maven.compiler.source>1.8</maven.compiler.source>
+      <maven.compiler.target>1.8</maven.compiler.target>
+      <project.build.encoding>utf8</project.build.encoding>
+      <project.build.sourceEncoding>utf8</project.build.sourceEncoding>
+      <!-- 
+       This is for SolrJ 6.* but can be used with older Solr Server version
+       (see https://wiki.apache.org/solr/Solrj for details).
+       For supported request parameters of differt SolrTextTagger versiosn please
+       see https://github.com/OpenSextant/SolrTextTagger
+       -->
+      <solr.version>6.1.0</solr.version>
+    </properties>
+    
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.solr</groupId>
+            <artifactId>solr-solrj</artifactId>
+            <version>${solr.version}</version>
+        </dependency>
+    </dependencies>
+
+
+</project>
