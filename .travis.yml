@@ -1,0 +1,10 @@
+language: java
+
+jdk:
+  - openjdk8
+  - oraclejdk8
+  - oraclejdk9
+
+install:
+  - mvn install -B -V -DskipTests=true -Dmaven.javadoc.skip=true
+  - mvn test -B -Dmaven.javadoc.skip=true
