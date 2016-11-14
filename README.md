@@ -14,6 +14,7 @@ Intended Usage
     TagRequest request = new TagRequest(params, 
         new StringStream(content, "text/plain"));
     //request.setPath("/my-custom-tagger-path"); //default is "/tag"
+    //request.setDocIdField("my-id"); //set the name of the `uniqueKey` field if != "id"
     try {
         TagResponse response = request.process(client);
         for(Tag tag : response.getTags()){
