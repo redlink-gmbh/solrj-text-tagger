@@ -13,6 +13,8 @@ import org.apache.solr.client.solrj.response.SolrResponseBase;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.util.NamedList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A response as sent by the <a href="https://github.com/OpenSextant/SolrTextTagger">SolrTextTagger</a> request handler
@@ -50,6 +52,8 @@ import org.apache.solr.common.util.NamedList;
  */
 public class TagResponse extends SolrResponseBase {
     
+    private final Logger log = LoggerFactory.getLogger(getClass());
+    
     private static final long serialVersionUID = 3978938148590733417L;
 
     private SolrClient solrClient;
@@ -60,6 +64,8 @@ public class TagResponse extends SolrResponseBase {
     
     protected Map<Object, SolrDocument> docMap;
     protected List<Tag> tags = Collections.emptyList();
+
+    private String docIdField;
 
 
     /**
@@ -91,10 +97,20 @@ public class TagResponse extends SolrResponseBase {
         if(_results != null){
             docMap = new HashMap<>();
             _results.stream().forEach( doc -> {
-                Object id = doc.get("id");
+                Object id = doc.get(docIdField);
                 assert id != null;
+                if(id == null){
+                    log.warn("NULL value for document id field value. This indicates that {} is"
+                            + "not the document id field of the schema! Please do set the correct"
+                            + "field name via TagRequest#setDocIdField(..)", docIdField);
+                }
                 SolrDocument old = docMap.put(id, doc);
                 assert old == null;
+                if(old != null){
+                    log.warn("Multiple result document with id='{}'. This indicates that {} is"
+                            + "not the document id field of the schema! Please do set the correct"
+                            + "field name via TagRequest#setDocIdField(..)", id, docIdField);
+                }
             });
         }
         if(_tags != null){
@@ -105,6 +121,27 @@ public class TagResponse extends SolrResponseBase {
         } else {
             this.tags = Collections.emptyList();
         }
+    }
+    
+    /**
+     * The Document ID field is required for assigning
+     * {@link #getResults()} with the IDs of the {@link #getTags()}.
+     * The default <code>id</code> will work for most solr schema.
+     * However if this is not set correctly the {@link Tag#getDocs()}
+     * method will not work correctly.
+     * @return the document ID field name
+     */
+    protected void setDocIdField(String docIdField) {
+        this.docIdField = docIdField;
+        
+    }
+    /**
+     * Getter for the document ID field name. This is required to
+     * assign {@link #getResults()} to {@link Tag}s.
+     * @return the document id field name
+     */
+    public String getDocIdField() {
+        return docIdField;
     }
     
     public NamedList<Object> getHeader() {

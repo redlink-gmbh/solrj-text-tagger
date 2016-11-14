@@ -52,6 +52,7 @@ public class TagRequest extends SolrRequest<TagResponse> {
     private static final String DEFAULT_PATH = "/tag";
     private SolrParams params;
     private Set<ContentStream> contentStreams;
+    private String docIdField = "id"; //ID is used by the default Solr schema
 
     public TagRequest(SolrParams params, ContentStream content) {
         super(METHOD.POST, DEFAULT_PATH);
@@ -63,6 +64,14 @@ public class TagRequest extends SolrRequest<TagResponse> {
         super(METHOD.POST, path);
     }
 
+    public String getDocIdField() {
+        return docIdField;
+    }
+    
+    public void setDocIdField(String docIdField) {
+        this.docIdField = docIdField;
+    }
+    
     @Override
     public SolrParams getParams() {
         return params;
@@ -75,7 +84,9 @@ public class TagRequest extends SolrRequest<TagResponse> {
 
     @Override
     protected TagResponse createResponse(SolrClient client) {
-        return new TagResponse(client);
+        TagResponse response = new TagResponse(client);
+        response.setDocIdField(docIdField);
+        return response;
     }
 
 }
