@@ -148,7 +148,7 @@ public class TagParams extends ModifiableSolrParams {
      * for example, you enable synonym expansion at query time in the analyzer, 
      * which you normally shouldn't do. Let this default to false unless you know that 
      * such tokens can't be avoided.
-     * @return
+     * @return the state
      */
     public boolean isSkipAltTokens() {
         return this.getBool(STT_SKIP_ALT_TOKENS);
@@ -156,7 +156,7 @@ public class TagParams extends ModifiableSolrParams {
 
     /**
      * Setter for the  boolean flag that causes stopwords (or any condition causing 
-     * positions to skip like >255 char words) to be ignored as if it wasn't there. 
+     * positions to skip like &gt;255 char words) to be ignored as if it wasn't there. 
      * Otherwise, the behavior is to treat them as breaks in tagging on the 
      * presumption your indexed text-analysis configuration doesn't have a 
      * StopWordFilter. By default the indexed analysis chain is checked for the 
@@ -172,7 +172,7 @@ public class TagParams extends ModifiableSolrParams {
     }
     /**
      * Getter for the  boolean flag that causes stopwords (or any condition causing 
-     * positions to skip like >255 char words) to be ignored as if it wasn't there. 
+     * positions to skip like &gt;255 char words) to be ignored as if it wasn't there. 
      * Otherwise, the behavior is to treat them as breaks in tagging on the 
      * presumption your indexed text-analysis configuration doesn't have a 
      * StopWordFilter. By default the indexed analysis chain is checked for the 
@@ -220,7 +220,7 @@ public class TagParams extends ModifiableSolrParams {
      * Similar to xmlOffsetAdjust except for HTML content that may have various issues 
      * that would never work with an XML parser. There needn't be a top level element, 
      * and some tags are known to self-close (e.g. BR). The tagger uses the 
-     * Jericho HTML Parser for this feature (dual LGPL & EPL licensed).
+     * Jericho HTML Parser for this feature (dual LGPL and EPL licensed).
      * <p>
      * If disabled this will also disable <code>{@link #isNonTaggableTags()}</code>
      * @param htmlOffsetAdjust the state
@@ -243,7 +243,7 @@ public class TagParams extends ModifiableSolrParams {
      * Similar to xmlOffsetAdjust except for HTML content that may have various issues 
      * that would never work with an XML parser. There needn't be a top level element, 
      * and some tags are known to self-close (e.g. BR). The tagger uses the 
-     * Jericho HTML Parser for this feature (dual LGPL & EPL licensed).
+     * Jericho HTML Parser for this feature (dual LGPL and EPL licensed).
      * @return the state
      */
     public boolean isHtmlOffsetAdjust() {
@@ -255,7 +255,7 @@ public class TagParams extends ModifiableSolrParams {
      * elements. Comma delimited, lower-case. For example <code>'a'</code> (anchor) 
      * would be a likely choice so that links the application inserts don't overlap 
      * other links. <p>
-     * If enabled this will also enable <code>{@link #isHtmlOffsetAdjust()</code>
+     * If enabled this will also enable <code>{@link #isHtmlOffsetAdjust()}</code>
      * @param nonTaggableTags
      * @return this
      * @see #setHtmlOffsetAdjust(boolean)

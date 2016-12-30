@@ -129,7 +129,7 @@ public class TagResponse extends SolrResponseBase {
      * The default <code>id</code> will work for most solr schema.
      * However if this is not set correctly the {@link Tag#getDocs()}
      * method will not work correctly.
-     * @return the document ID field name
+     * @param docIdField the document ID field name
      */
     protected void setDocIdField(String docIdField) {
         this.docIdField = docIdField;
