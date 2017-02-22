@@ -170,7 +170,7 @@ public class TagResponse extends SolrResponseBase {
         
         Integer _start;
         Integer _end;
-        List<String> _ids;
+        List<Object> _ids;
         
         @SuppressWarnings("unchecked")
         Tag(NamedList<Object> res){
@@ -184,7 +184,7 @@ public class TagResponse extends SolrResponseBase {
                     _end = (Integer)res.getVal(i);
                     break;
                 case "ids":
-                    _ids = (List<String>)res.getVal(i);
+                    _ids = (List<Object>)res.getVal(i);
                     break;
                 default:
                     break;
@@ -200,7 +200,7 @@ public class TagResponse extends SolrResponseBase {
             return _end == null ? -1 : _end.intValue();
         }
         
-        public List<String> getIds(){
+        public List<Object> getIds(){
             return _ids;
         }
         
